@@ -1,0 +1,60 @@
+float x=250;                                       //не цели числа
+float y=250;
+int diam=50;                                       //цели числа
+int diam1 =  20;
+int x1= (int) random(0, height-diam);
+int y1 = (int) random(0, width-diam);
+int score=0;
+String win="You Won!";                             //текст
+String reset="Press space to start a new game";
+
+
+void setup(){                                      //функция 1 път
+  size(500,500);                                  //размер на екрана
+}
+
+void draw(){                                     //фукция, която се изпълнява постоянно
+  background(#7031DE);
+  fill(#C031DE);                                 
+  ellipse(x,y,diam,diam);
+  ellipse(x1,y1,diam1,diam1);
+  textSize(30);                                   
+  text("Score:",330,50);
+  text(score,435,50);
+  if(keyPressed && keyCode==UP){
+    y-=5;
+  }
+  if(keyPressed && keyCode==DOWN){
+    y+=5;
+  }
+  if(keyPressed && keyCode==LEFT){
+    x-=5;
+  }
+  if(keyPressed && keyCode==RIGHT){
+    x+=5;
+  }
+
+  if(dist(x,y,x1,y1)<diam-diam1){                 //ако разтоянието на двете топчета стане по-малко от разликата на радиусите
+    y1 = (int) random(0, height-diam1);          
+    x1 = (int) random(0, width-diam);
+    diam += 10;
+    score++;
+ }
+  if(score==10){
+    background(#091AAA);
+    textSize(45);
+    text(win,160,250);
+    textSize(30);
+    text(reset,20,280);
+  }
+  if(keyPressed && key==' '){
+    reset();
+  }
+}
+ 
+ void reset(){
+ score=0;
+  x=250;                                     
+  y=250;
+  diam=50;
+ }
